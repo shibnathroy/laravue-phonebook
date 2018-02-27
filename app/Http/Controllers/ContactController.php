@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ContactRequest;
 use App\Models\Contact;
 use Illuminate\Http\Request;
+
 
 class ContactController extends Controller
 {
@@ -12,8 +14,17 @@ class ContactController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if($request->ajax()){
+
+               $contacts = Contact::orderBy('name', 'ASC')->get();
+
+               if($contacts){
+                   return $contacts;
+               }
+         }
+
         return view('phonebook');
     }
 
@@ -33,7 +44,7 @@ class ContactController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ContactRequest $request)
     {
         $contact = new Contact;
         $contact->name = $request->name;
