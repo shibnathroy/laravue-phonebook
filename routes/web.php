@@ -10,11 +10,14 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('phonebook');
-});
-
-Route::get('/{name}', function(){
+Route::get('/phonebook/{name}', function(){
 	return redirect('/');
 })->where('name', '[A-Za-z]+');
+
+Route::resource('/phonebook', 'ContactController');
+
+Route::get('/', function () {
+    return redirect('/phonebook');
+});
+
+

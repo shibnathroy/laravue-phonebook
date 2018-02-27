@@ -25,9 +25,13 @@ let MyFooter = require('./components/MyFooter.vue');
 let HomeComponent= require('./components/Home.vue');
 let AboutComponent = require('./components/About.vue');
 
+
+
+
 const routes = [
-  { path: '/home', component: HomeComponent },
-  { path: '/about', component: AboutComponent }
+  { path: '/phonebook/home', component: HomeComponent },
+  { path: '/phonebook/about', component: AboutComponent },
+  { path: '/phonebook/', redirect: '/phonebook/home' }
 ]
 
 const router = new VueRouter({
